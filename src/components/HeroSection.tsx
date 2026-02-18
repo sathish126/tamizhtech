@@ -38,8 +38,9 @@ const HeroSection = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/40" />
       </div>
+
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-neon-cyan/30 mb-8 animate-fade-in">
@@ -60,7 +61,7 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <Button
               onClick={() => scrollToSection('#robotics-club')}
               variant="neon"
@@ -76,9 +77,20 @@ const HeroSection = () => {
               size="xl"
               className="font-display w-full sm:w-auto"
             >
-              <MessageCircle className="w-5 h-5" />
               Schedule Consultation
             </Button>
+          </div>
+          {/* WhatsApp text link */}
+          <div className="mb-16 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
+            <a
+              href="https://wa.me/918148045030?text=Hello%20TamizhTech!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-tech text-neon-green/80 hover:text-neon-green transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              WhatsApp Us
+            </a>
           </div>
 
           {/* Stats */}
@@ -87,7 +99,6 @@ const HeroSection = () => {
               <div
                 key={stat.label}
                 className="glass-card p-6 rounded-2xl border border-neon-cyan/20 hover:border-neon-cyan/50 transition-all duration-500 group hover:scale-105"
-                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
               >
                 <stat.icon className="w-6 h-6 text-neon-cyan mb-3 mx-auto group-hover:scale-110 transition-transform" />
                 <div className="font-display text-3xl md:text-4xl font-bold neon-text-cyan mb-1">

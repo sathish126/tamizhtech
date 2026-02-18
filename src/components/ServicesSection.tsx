@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { MessageCircle, Printer, CircuitBoard, Scissors, Cog, RotateCcw, Bot } from 'lucide-react';
+import { MessageCircle, Printer, CircuitBoard, Scissors, Cog, RotateCcw, Bot, Flame } from 'lucide-react';
 
 const services = [
   {
@@ -33,10 +33,16 @@ const services = [
     color: 'neon-orange',
   },
   {
+    name: 'Welding Works',
+    icon: Flame,
+    description: 'Custom welding services for robotic structures and frames',
+    color: 'neon-cyan',
+  },
+  {
     name: 'Custom Robotics Solutions',
     icon: Bot,
     description: 'Complete solution design and integration for automation',
-    color: 'neon-cyan',
+    color: 'neon-magenta',
   },
 ];
 
@@ -47,10 +53,10 @@ const ServicesSection = () => {
   };
 
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
+    <section id="services" className="section-wrapper">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-neon-green/5 to-background" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-content">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-neon-green/30 mb-6">
@@ -61,19 +67,18 @@ const ServicesSection = () => {
             <span className="text-foreground">Prototyping &</span>
             <span className="neon-text-gradient"> Manufacturing</span>
           </h2>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             End-to-end manufacturing services for your robotics projects
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <div
               key={service.name}
               className="glass-card p-6 rounded-2xl border border-border hover:border-neon-cyan/50 transition-all duration-500 group relative overflow-hidden"
             >
-              {/* Glow effect */}
               <div className={`absolute inset-0 bg-gradient-to-br from-${service.color}/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
               
               <div className="relative z-10">
@@ -86,13 +91,15 @@ const ServicesSection = () => {
                 <p className="text-sm text-foreground/60 mb-4">
                   {service.description}
                 </p>
-                <button
+                <Button
                   onClick={() => handleServiceEnquiry(service.name)}
-                  className="inline-flex items-center gap-2 text-sm font-tech text-neon-cyan hover:text-neon-magenta transition-colors"
+                  variant="glass"
+                  size="sm"
+                  className="font-tech"
                 >
                   <MessageCircle className="w-4 h-4" />
                   Discuss Your Requirement
-                </button>
+                </Button>
               </div>
             </div>
           ))}

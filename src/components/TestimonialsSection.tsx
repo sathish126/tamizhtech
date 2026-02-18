@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from 'react';
 import { Quote, Star, MessageSquare } from 'lucide-react';
 
 const testimonials = [
@@ -53,21 +52,11 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden">
+    <section id="testimonials" className="section-wrapper">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-neon-magenta/5 to-background" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-content">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-neon-magenta/30 mb-6">
@@ -80,72 +69,48 @@ const TestimonialsSection = () => {
           </h2>
         </div>
 
-        {/* Testimonials Carousel */}
-        <div className="relative max-w-6xl mx-auto">
-          <div ref={containerRef} className="overflow-hidden">
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((testimonial) => (
             <div
-              className="flex transition-transform duration-700 ease-out"
-              style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+              key={testimonial.name}
+              className="glass-card p-6 rounded-2xl border border-neon-magenta/20 hover:border-neon-magenta/50 transition-all duration-500 group"
             >
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                <div
-                  key={`${testimonial.name}-${index}`}
-                  className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3"
-                >
-                  <div className="glass-card p-6 rounded-2xl border border-neon-magenta/20 hover:border-neon-magenta/50 transition-all duration-500 h-full group">
-                    {/* Quote Icon */}
-                    <div className="w-10 h-10 rounded-xl bg-neon-magenta/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <Quote className="w-5 h-5 text-neon-magenta" />
-                    </div>
-                    
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-neon-cyan text-neon-cyan" />
-                      ))}
-                    </div>
-                    
-                    {/* Text */}
-                    <p className="text-foreground/80 mb-6 text-sm leading-relaxed">
-                      "{testimonial.text}"
-                    </p>
-                    
-                    {/* Author */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-cyan to-neon-magenta flex items-center justify-center">
-                        <span className="font-display text-xs font-bold text-background">
-                          {testimonial.name.split(' ').map(n => n[0]).join('')}
-                        </span>
-                      </div>
-                      <div>
-                        <div className="font-display text-sm font-bold text-foreground">
-                          {testimonial.name}
-                        </div>
-                        <div className="text-xs text-foreground/60 font-tech">
-                          {testimonial.role}
-                        </div>
-                      </div>
-                    </div>
+              {/* Quote Icon */}
+              <div className="w-10 h-10 rounded-xl bg-neon-magenta/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Quote className="w-5 h-5 text-neon-magenta" />
+              </div>
+              
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-neon-cyan text-neon-cyan" />
+                ))}
+              </div>
+              
+              {/* Text */}
+              <p className="text-foreground/80 mb-6 text-sm leading-relaxed">
+                "{testimonial.text}"
+              </p>
+              
+              {/* Author */}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-cyan to-neon-magenta flex items-center justify-center">
+                  <span className="font-display text-xs font-bold text-background">
+                    {testimonial.name.split(' ').map(n => n[0]).join('')}
+                  </span>
+                </div>
+                <div>
+                  <div className="font-display text-sm font-bold text-foreground">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-xs text-foreground/60 font-tech">
+                    {testimonial.role}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-
-          {/* Pagination Dots */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'w-8 bg-gradient-to-r from-neon-cyan to-neon-magenta'
-                    : 'bg-foreground/30 hover:bg-foreground/50'
-                }`}
-              />
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>
