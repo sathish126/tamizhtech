@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Sparkles, Cpu, Zap, Globe } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
+import heroRobot from '@/assets/hero-robot.jpg';
 
 const stats = [
   { value: '150+', label: 'Events in last 3 years', icon: Sparkles },
@@ -28,6 +29,15 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <AnimatedBackground />
       
+      {/* Hero Robot Image */}
+      <div className="absolute inset-0 z-[1]">
+        <img 
+          src={heroRobot} 
+          alt="Futuristic robot arm and drone in neon-lit lab" 
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/40" />
+      </div>
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
