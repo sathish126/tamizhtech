@@ -29,6 +29,14 @@ const courses = {
   ],
 };
 
+const advancedModules = [
+  'Basic Electronics', 'Advanced Electronics', '3D Modeling Basics', '3D Modeling Advanced',
+  'Robo Soccer Design', 'Robo Race Design', 'Robo War Design',
+  'PCB Design Basics', 'PCB Design Advanced',
+  'Drone Technology Basics', 'Drone Technology Advanced',
+  'ROS Basics', 'ROS Advanced',
+];
+
 const levelColors: Record<string, string> = {
   Beginner: 'bg-neon-green/20 text-neon-green border-neon-green/30',
   Intermediate: 'bg-neon-cyan/20 text-neon-cyan border-neon-cyan/30',
@@ -48,10 +56,10 @@ const CoursesSection = () => {
   };
 
   return (
-    <section id="courses" className="py-24 relative overflow-hidden">
+    <section id="courses" className="section-wrapper">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-neon-purple/5 to-background" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-content">
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-neon-purple/30 mb-6">
@@ -62,7 +70,7 @@ const CoursesSection = () => {
             <span className="text-foreground">Courses &</span>
             <span className="neon-text-gradient"> Learning Tracks</span>
           </h2>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Master robotics, embedded systems and IoT with expert-led courses
           </p>
         </div>
@@ -86,8 +94,8 @@ const CoursesSection = () => {
         </div>
 
         {/* Course Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {courses[activeCategory as keyof typeof courses].map((course, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-16">
+          {courses[activeCategory as keyof typeof courses].map((course) => (
             <div
               key={course.title}
               className="glass-card p-6 rounded-2xl border border-neon-cyan/20 hover:border-neon-cyan/50 transition-all duration-500 group"
@@ -107,10 +115,7 @@ const CoursesSection = () => {
               
               <div className="flex flex-wrap gap-2 mb-4">
                 {course.languages.map((lang) => (
-                  <span
-                    key={lang}
-                    className="px-2 py-1 rounded-md bg-muted text-xs font-tech text-foreground/70"
-                  >
+                  <span key={lang} className="px-2 py-1 rounded-md bg-muted text-xs font-tech text-foreground/70">
                     {lang}
                   </span>
                 ))}
@@ -140,6 +145,21 @@ const CoursesSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Advanced Learning Modules */}
+        <div className="glass-card p-8 rounded-2xl border border-neon-purple/20 max-w-4xl mx-auto">
+          <h3 className="font-display text-xl font-bold text-foreground mb-6 text-center">
+            Advanced Learning <span className="neon-text-gradient">Modules</span>
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {advancedModules.map((module) => (
+              <div key={module} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-neon-purple/5 border border-neon-purple/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-neon-purple flex-shrink-0" />
+                <span className="text-xs font-tech text-foreground/70">{module}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

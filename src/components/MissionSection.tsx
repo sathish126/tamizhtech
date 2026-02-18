@@ -1,5 +1,6 @@
 import { Target, Eye, Heart, Award, Shield, Globe, Users } from 'lucide-react';
 
+// Define core values with labels and icons
 const coreValues = [
   { label: 'Innovation Leadership', icon: Target },
   { label: 'Enterprise Excellence', icon: Award },
@@ -8,6 +9,7 @@ const coreValues = [
   { label: 'Community & Collaboration', icon: Users },
 ];
 
+// Define certifications with names and descriptions
 const certifications = [
   { name: 'ISO 9001:2015', description: 'Quality Management' },
   { name: 'ISO 27001', description: 'Information Security' },
@@ -17,10 +19,10 @@ const certifications = [
 
 const MissionSection = () => {
   return (
-    <section id="mission" className="py-24 relative overflow-hidden">
+    <section id="mission" className="section-wrapper">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-neon-cyan/5 to-background" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-content">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-neon-cyan/30 mb-6">
@@ -35,7 +37,6 @@ const MissionSection = () => {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-          {/* Mission Card */}
           <div className="glass-card p-8 rounded-3xl border border-neon-cyan/30 hover:border-neon-cyan/60 transition-all duration-500 group">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-cyan/20 to-neon-cyan/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Target className="w-8 h-8 text-neon-cyan" />
@@ -46,7 +47,6 @@ const MissionSection = () => {
             </p>
           </div>
 
-          {/* Vision Card */}
           <div className="glass-card p-8 rounded-3xl border border-neon-magenta/30 hover:border-neon-magenta/60 transition-all duration-500 group">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-magenta/20 to-neon-magenta/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Eye className="w-8 h-8 text-neon-magenta" />
@@ -57,7 +57,6 @@ const MissionSection = () => {
             </p>
           </div>
 
-          {/* Core Values Card */}
           <div className="glass-card p-8 rounded-3xl border border-neon-purple/30 hover:border-neon-purple/60 transition-all duration-500 group">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-purple/20 to-neon-purple/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Heart className="w-8 h-8 text-neon-purple" />
@@ -77,18 +76,16 @@ const MissionSection = () => {
           </div>
         </div>
 
-        {/* Certifications */}
-        <div className="flex flex-wrap justify-center gap-4">
+        {/* Certifications as pill badges */}
+        <div className="flex flex-wrap justify-center gap-3">
           {certifications.map((cert) => (
             <div
               key={cert.name}
-              className="flex items-center gap-3 px-5 py-3 glass-card rounded-xl border border-neon-green/20 hover:border-neon-green/50 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full border border-neon-green/20 hover:border-neon-green/50 transition-all duration-300"
             >
-              <Shield className="w-5 h-5 text-neon-green" />
-              <div>
-                <div className="font-display text-sm font-bold text-foreground">{cert.name}</div>
-                <div className="text-xs text-foreground/60">{cert.description}</div>
-              </div>
+              <Shield className="w-4 h-4 text-neon-green" />
+              <span className="font-tech text-sm text-foreground/80">{cert.name}</span>
+              <span className="text-xs text-foreground/50">– {cert.description}</span>
             </div>
           ))}
         </div>

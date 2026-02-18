@@ -20,6 +20,12 @@ const productCategories = [
     description: 'Corporate robots for display, engagement and service automation',
     gradient: 'from-neon-green to-neon-cyan',
   },
+  {
+    name: 'Robotics Development Kits',
+    icon: Cog,
+    description: 'Complete kits for learning, prototyping and competitions',
+    gradient: 'from-neon-purple to-neon-magenta',
+  },
 ];
 
 const roboticsKits = [
@@ -45,10 +51,10 @@ const ProductsSection = () => {
   };
 
   return (
-    <section id="products" className="py-24 relative overflow-hidden">
+    <section id="products" className="section-wrapper">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-neon-magenta/5 to-background" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-content">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-neon-magenta/30 mb-6">
@@ -59,27 +65,27 @@ const ProductsSection = () => {
             <span className="text-foreground">Products &</span>
             <span className="neon-text-gradient"> Platforms</span>
           </h2>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Explore our range of robotics solutions and development kits
           </p>
         </div>
 
         {/* Product Categories */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {productCategories.map((category, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {productCategories.map((category) => (
             <div
               key={category.name}
-              className="glass-card p-8 rounded-3xl border border-transparent hover:border-neon-cyan/50 transition-all duration-500 group relative overflow-hidden"
+              className="glass-card p-6 rounded-3xl border border-transparent hover:border-neon-cyan/50 transition-all duration-500 group relative overflow-hidden"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-5 group-hover:opacity-10 transition-opacity`} />
               <div className="relative z-10">
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <category.icon className="w-8 h-8 text-background" />
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${category.gradient} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+                  <category.icon className="w-7 h-7 text-background" />
                 </div>
-                <h3 className="font-display text-xl font-bold text-foreground mb-3 group-hover:neon-text-cyan transition-all">
+                <h3 className="font-display text-base font-bold text-foreground mb-2 group-hover:neon-text-cyan transition-all">
                   {category.name}
                 </h3>
-                <p className="text-foreground/70 mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   {category.description}
                 </p>
                 <Button
