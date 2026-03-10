@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate, useLocation } from 'react-router-dom';
+import ttrcLogo from '@/assets/ttrc-logo.png';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -11,6 +13,7 @@ const navItems = [
   { label: 'Clients', href: '#clients' },
   { label: 'Courses', href: '#courses' },
   { label: 'Team', href: '#team' },
+  { label: 'Gallery', href: '/gallery', isRoute: true },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -18,26 +21,36 @@ const navItems = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (href: string, isRoute?: boolean) => {
+    if (isRoute) {
+      navigate(href);
+      setIsMobileMenuOpen(false);
+      return;
+    }
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    } else {
+      const element = document.querySelector(href);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
   };
 
   const handleJoinClub = () => {
     scrollToSection('#robotics-club');
-    // Open Google Form in new tab
     window.open('https://forms.google.com/robotics-club-membership', '_blank');
   };
 
@@ -54,10 +67,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-magenta flex items-center justify-center font-display font-bold text-background text-lg group-hover:neon-glow-cyan transition-all duration-300">
-              TT
-            </div>
+          <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }} className="flex items-center gap-2 group">
+            <img 
+              src={ttrcLogo} 
+              alt="TamizhTech Robotics" 
+              className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+            />
             <span className="font-display font-bold text-lg hidden sm:block neon-text-gradient">
               TamizhTech
             </span>
@@ -68,7 +83,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => scrollToSection(item.href, (item as any).isRoute)}
                 className="px-3 py-2 text-sm font-medium text-foreground/70 hover:text-neon-cyan transition-all duration-300 relative group"
               >
                 {item.label}
@@ -79,20 +94,10 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button
-              onClick={handleJoinClub}
-              variant="neon"
-              size="sm"
-              className="font-display"
-            >
+            <Button onClick={handleJoinClub} variant="neon" size="sm" className="font-display">
               Join Robotics Club
             </Button>
-            <Button
-              onClick={handleWhatsApp}
-              variant="neonOutline"
-              size="sm"
-              className="font-display gap-2"
-            >
+            <Button onClick={handleWhatsApp} variant="neonOutline" size="sm" className="font-display gap-2">
               <MessageCircle className="w-4 h-4" />
               WhatsApp Us
             </Button>
@@ -116,7 +121,7 @@ const Navbar = () => {
           {navItems.map((item) => (
             <button
               key={item.label}
-              onClick={() => scrollToSection(item.href)}
+              onClick={() => scrollToSection(item.href, (item as any).isRoute)}
               className="block w-full text-left px-4 py-3 text-foreground/70 hover:text-neon-cyan hover:bg-neon-cyan/5 rounded-lg transition-all duration-300 font-medium"
             >
               {item.label}
